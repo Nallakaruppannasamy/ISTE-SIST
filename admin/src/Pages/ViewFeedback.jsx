@@ -17,7 +17,7 @@ const ViewFeedback = () => {
 
     const token = localStorage.getItem('token');
     // Using environment variable with a fallback to your local backend
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
     const fetchFeedback = async () => {
         try {

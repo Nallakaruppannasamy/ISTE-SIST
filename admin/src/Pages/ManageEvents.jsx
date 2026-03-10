@@ -32,7 +32,7 @@ const ManageEvents = () => {
     const [brochure, setBrochure] = useState(false);
 
     const token = localStorage.getItem('token');
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
     // Fetch all events
     const fetchEvents = async () => {

@@ -18,7 +18,7 @@ const Dashboard = () => {
     
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
     const getDashData = async () => {
         try {

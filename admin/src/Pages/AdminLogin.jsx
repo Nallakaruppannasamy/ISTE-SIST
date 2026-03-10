@@ -17,7 +17,7 @@ const AdminLogin = ({ setToken }) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            const backendUrl = import.meta.env.VITE_BACKEND_URL;
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
             const response = await axios.post(`${backendUrl}/api/admin/login`, { email, password });
             
             if (response.data.success) {

@@ -12,7 +12,7 @@ const ManageGallery = () => {
     const [loading, setLoading] = useState(false);
 
     const token = localStorage.getItem('token');
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
     const fetchData = async () => {
         try {
