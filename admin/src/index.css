@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600&family=Russo+One&display=swap');
+
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #0f172a;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.dark body {
+  background-color: var(--bg-dark);
+  color: #f1f5f9;
+  color-scheme: dark;
+}
+
+.font-russo { font-family: 'Russo One', sans-serif; }
+.font-ubuntu { font-family: 'Ubuntu', sans-serif; }
+
+.iste-stroke {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: stroke-draw 5s ease-in-out forwards;
+}
+
+@keyframes stroke-draw {
+  0% { stroke-dashoffset: 1000; fill: transparent; }
+  60% { stroke-dashoffset: 0; fill: transparent; }
+  100% { stroke-dashoffset: 0; fill: #9333ea; }
+}
