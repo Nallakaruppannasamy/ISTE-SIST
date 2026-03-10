@@ -1,7 +1,7 @@
 
 # ISTE SIST - Official Website & Admin Portal
 
-A full-stack MERN application developed for the ISTE (International Society for Technical Education) Student Chapter at Sathyabama Institute of Science and Technology (SIST). This project includes a public-facing frontend for users and a comprehensive admin dashboard for management.
+A full-stack MERN application developed for the ISTE (Indian Society for Technical Education) Student Chapter at Sathyabama Institute of Science and Technology (SIST). This project includes a public-facing frontend for users and a comprehensive admin dashboard for management.
 
 ## 🚀 Features
 
