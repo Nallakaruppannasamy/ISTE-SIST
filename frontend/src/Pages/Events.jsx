@@ -53,7 +53,7 @@ const Events = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedYear, setSelectedYear] = useState("All");
     const [selectedEvent, setSelectedEvent] = useState(null); 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
     const fetchEvents = async () => {
         try {

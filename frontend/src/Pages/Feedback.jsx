@@ -28,7 +28,7 @@ const Feedback = () => {
     });
 
     const formRef = useRef(null);
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
     // Rating Labels (Feature 1)
     const ratingLabels = ["Poor", "Fair", "Good", "Very Good", "Exceptional!"];

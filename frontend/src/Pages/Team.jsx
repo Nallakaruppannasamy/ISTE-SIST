@@ -88,7 +88,7 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(""); 
   const [showBackToTop, setShowBackToTop] = useState(false); 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL; 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"; 
 
   const fetchTeam = async () => {
     try {
