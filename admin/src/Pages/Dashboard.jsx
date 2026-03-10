@@ -97,7 +97,7 @@ const Dashboard = () => {
                 <button onClick={() => navigate('/admin/feedback')} className="relative flex items-center gap-3 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-emerald-600 transition-colors">
                     <MessageSquare size={20} className="text-emerald-600"/>
                     <span className="text-sm font-semibold dark:text-white">Feedback</span>
-                    {dashData.unreadFeedback > 0 && (
+                    {dashData?.unreadFeedback > 0 && (
                         <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] text-white font-bold">
                             {dashData.unreadFeedback}
                         </span>
@@ -118,8 +118,8 @@ const Dashboard = () => {
                 <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Total Events</p>
                     <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold dark:text-white">{dashData.totalEvents}</span>
-                        <span className="text-[10px] text-emerald-500 font-bold">{dashData.upcomingEvents} Upcoming</span>
+                        <span className="text-3xl font-bold dark:text-white">{dashData?.totalEvents}</span>
+                        <span className="text-[10px] text-emerald-500 font-bold">{dashData?.upcomingEvents} Upcoming</span>
                     </div>
                 </div>
                 <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
