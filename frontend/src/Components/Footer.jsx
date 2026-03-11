@@ -8,13 +8,13 @@ const Footer = () => {
         <h1 className="text-4xl font-russo mb-8 dark:text-white">Get In Touch</h1>
         
         <div className="flex justify-center gap-8 mb-12">
-          <a href="https://www.linkedin.com/in/iste-student-s-chapter-sathyabama-191720288/" target="_blank" className="hover:scale-125 transition-transform">
+          <a href="https://www.linkedin.com/company/iste-ece-sist-student-chapter/" target="_blank" className="hover:scale-125 transition-transform">
             <img src={assets.linkedin} alt="LinkedIn" className="h-12" />
           </a>
-          <a href="https://www.instagram.com/iste_studentchaptersist/" target="_blank" className="hover:scale-125 transition-transform">
+          <a href="https://www.instagram.com/iste_ece_sist/" target="_blank" className="hover:scale-125 transition-transform">
             <img src={assets.inst} alt="Instagram" className="h-12" />
           </a>
-          <a href="mailto:istestudentchaptersathyabama@gmail.com" className="hover:scale-125 transition-transform">
+          <a href="mailto:sathybamaistestudentchapter@gmail.com" className="hover:scale-125 transition-transform">
             <img src={assets.mail_svg} alt="Email" className="h-12" />
           </a>
         </div>
