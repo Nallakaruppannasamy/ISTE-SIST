@@ -26,16 +26,13 @@ const TeamCard = ({ name, role, img, linkedin, isCore }) => {
 
   return (
     <motion.div
-      // Dynamic Scaling and Staggered entry
       variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
       whileHover={{ y: -12, scale: 1.02 }}
-      // Glassmorphism, Lead Highlighting (Gold Border), and Glow Hover
       className={`glass-effect p-6 rounded-4xl shadow-xl border-2 flex flex-col items-center text-center group transition-all duration-500 
         ${isHead ? 'border-yellow-400/50 shadow-yellow-400/10' : 'border-slate-100 dark:border-slate-700'} 
         ${isCore ? 'md:p-10 md:scale-110' : ''} hover:shadow-purple-500/20 hover:border-purple-500`}
     >
       <div className="relative mb-4">
-        {/* Profile Hover Overlay */}
         <div className="absolute inset-0 bg-purple-600 rounded-full scale-0 group-hover:scale-105 transition-transform duration-500 opacity-20 z-10"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 z-20 transition-opacity duration-300">
           <a
@@ -67,7 +64,6 @@ const TeamCard = ({ name, role, img, linkedin, isCore }) => {
         {role}
       </p>
 
-      {/* LinkedIn Tooltip integrated via Title */}
       <div className="flex gap-4">
         <a
           href={linkedin}
@@ -108,12 +104,12 @@ const Team = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Filter tabs logic
+  // Filter tabs logic aligned with ManageTeams order
   const categories = [
     { title: "Core Team", filter: ["Chairperson", "Vice Chairperson", "Secretary", "Treasurer"], id: "core" },
     { title: "Executive Council", filter: ["Executive Council Member"], id: "exec" },
-    { title: "Technical Team", filter: ["Technical Team Head", "Technical Team Member"], id: "tech" },
     { title: "Management Team", filter: ["Management Team Head", "Management Team Member"], id: "mgmt" },
+    { title: "Technical Team", filter: ["Technical Team Head", "Technical Team Member"], id: "tech" },
     { title: "Media Team", filter: ["Media Team Head", "Media Team Member"], id: "media" },
     { title: "Design Team", filter: ["Design Team Head", "Design Team Member"], id: "design" },
     { title: "PR Team", filter: ["PR Team Head", "PR Team Member"], id: "pr" },
@@ -177,8 +173,13 @@ const Team = () => {
           </div>
         ) : (
           categories.map((cat, index) => {
+            // Filter members for this category and sort specific roles within the category
             const membersInCat = filteredData.filter(m => cat.filter.includes(m.position))
-              .sort((a, b) => (a.position.includes("Head") ? -1 : 1));
+              .sort((a, b) => {
+                const posA = cat.filter.indexOf(a.position);
+                const posB = cat.filter.indexOf(b.position);
+                return posA - posB;
+              });
 
             if (membersInCat.length === 0) return null;
 
@@ -194,7 +195,6 @@ const Team = () => {
                   <span className="w-12 h-0.5 bg-purple-600/30"></span>
                 </motion.h2>
 
-                {/* Staggered Animation Container */}
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
@@ -209,18 +209,17 @@ const Team = () => {
                       role={member.position}
                       img={member.image}
                       linkedin={member.linkedin}
-                      isCore={cat.id === "core"} //
+                      isCore={cat.id === "core"}
                     />
                   ))}
                 </motion.div>
-                {index < categories.length - 1 && <WaveDivider />} {/* */}
+                {index < categories.length - 1 && <WaveDivider />}
               </div>
             );
           })
         )}
       </div>
 
-      {/* Back to Top Button */}
       <AnimatePresence>
         {showBackToTop && (
           <motion.button
