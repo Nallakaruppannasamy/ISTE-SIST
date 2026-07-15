@@ -5,10 +5,10 @@ import axios from 'axios';
 
 // Skeleton Loading Component
 const SkeletonCard = () => (
-  <div className="bg-slate-200 dark:bg-slate-800 p-6 rounded-4xl animate-pulse h-100 w-full flex flex-col items-center">
-    <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-slate-300 dark:bg-slate-700 mb-4" />
-    <div className="h-6 w-3/4 bg-slate-300 dark:bg-slate-700 mb-2 rounded" />
-    <div className="h-4 w-1/2 bg-slate-300 dark:bg-slate-700 rounded" />
+  <div className="bg-slate-200 dark:bg-slate-800 p-4 rounded-2xl animate-pulse h-72 w-full flex flex-col justify-between">
+    <div className="aspect-square bg-slate-300 dark:bg-slate-700 w-full rounded-xl mb-3" />
+    <div className="h-4 bg-slate-300 dark:bg-slate-700 rounded mb-1 w-3/4 mx-auto" />
+    <div className="h-3 bg-slate-300 dark:bg-slate-700 rounded w-1/2 mx-auto" />
   </div>
 );
 
@@ -24,56 +24,54 @@ const WaveDivider = () => (
 const TeamCard = ({ name, role, img, linkedin, isCore }) => {
   const isHead = role.toLowerCase().includes('head');
 
+  const getRoleAccent = (pos) => {
+    if (["Chairperson", "Vice Chairperson", "Secretary", "Treasurer"].includes(pos)) return 'border-l-purple-500';
+    if (pos === "Executive Council Member") return 'border-l-indigo-500';
+    if (pos.toLowerCase().includes("head")) return 'border-l-amber-500';
+    if (pos.toLowerCase().includes("technical")) return 'border-l-cyan-500';
+    return 'border-l-slate-400';
+  };
+
   return (
     <motion.div
       variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-      whileHover={{ y: -12, scale: 1.02 }}
-      className={`glass-effect p-6 rounded-4xl shadow-xl border-2 flex flex-col items-center text-center group transition-all duration-500 
-        ${isHead ? 'border-yellow-400/50 shadow-yellow-400/10' : 'border-slate-100 dark:border-slate-700'} 
-        ${isCore ? 'md:p-10 md:scale-110' : ''} hover:shadow-purple-500/20 hover:border-purple-500`}
+      whileHover={{ y: -6 }}
+      className={`relative bg-white dark:bg-slate-900 rounded-2xl border-t dark:border-slate-800 border-x border-b border-l-4 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between max-w-62.5 mx-auto w-full ${getRoleAccent(role)} ${isCore ? 'ring-2 ring-purple-600/20' : ''}`}
     >
-      <div className="relative mb-4">
-        <div className="absolute inset-0 bg-purple-600 rounded-full scale-0 group-hover:scale-105 transition-transform duration-500 opacity-20 z-10"></div>
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 z-20 transition-opacity duration-300">
+      <div className="aspect-square relative overflow-hidden bg-slate-50 dark:bg-slate-950 w-full">
+        <img
+          src={img}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+
+      <div className="p-3.5 text-center space-y-1 flex-1 flex flex-col justify-center items-center relative">
+        {isHead && (
+          <span className="text-[8px] font-extrabold bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 px-2 py-0.5 rounded uppercase tracking-wider mb-1">
+            Domain Head
+          </span>
+        )}
+        
+        <h3 className="font-bold text-slate-800 dark:text-white text-xs truncate w-full">{name}</h3>
+        <p className="text-[9px] text-purple-600 dark:text-purple-400 font-bold uppercase tracking-widest truncate w-full mb-1.5">
+          {role}
+        </p>
+        
+        <div className="pt-2 w-full flex justify-center border-t dark:border-purple-600 mt-auto">
           <a
             href={linkedin}
             target="_blank"
             rel="noreferrer"
             title={`Visit ${name}'s LinkedIn Profile`}
-            className="p-3 bg-slate-100 dark:bg-slate-700 rounded-full hover:bg-purple-600 hover:text-white transition-all shadow-md"
+            className="inline-flex items-center gap-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors bg-slate-50 dark:bg-slate-800/60 px-2.5 py-0.5 rounded-lg group/link"
           >
-            <span className="bg-white/90 dark:bg-slate-900/90 px-3 py-1 rounded-full text-[10px] font-bold text-purple-600 flex items-center gap-1">
-              Connect <ExternalLink size={10} />
+            <Linkedin size={11} className="text-slate-400 group-hover/link:text-blue-600 dark:group-hover/link:text-blue-400" />
+            <span className="text-[9px] font-bold text-slate-400 group-hover/link:text-slate-600 dark:group-hover/link:text-slate-200 flex items-center gap-0.5">
+              LinkedIn <ExternalLink size={8} />
             </span>
           </a>
         </div>
-
-        <img
-          src={img}
-          alt={name}
-          className={`rounded-full object-cover border-4 transition-all duration-500 
-            ${isCore ? 'w-40 h-40 md:w-48 md:h-48' : 'w-32 h-32 md:w-40 md:h-40'}
-            ${isHead ? 'border-yellow-400' : 'border-purple-100 dark:border-slate-700 group-hover:border-purple-600'}`}
-        />
-      </div>
-
-      {isHead && <span className="text-[10px] font-bold bg-yellow-400 text-slate-900 px-2 py-0.5 rounded-full mb-2 uppercase tracking-tighter">Domain Head</span>}
-
-      <h3 className="font-russo text-xl dark:text-white mb-1 group-hover:text-purple-600 transition-colors">{name}</h3>
-      <p className="font-ubuntu text-purple-600 dark:text-purple-400 font-bold text-sm tracking-widest mb-4 uppercase">
-        {role}
-      </p>
-
-      <div className="flex gap-4">
-        <a
-          href={linkedin}
-          target="_blank"
-          rel="noreferrer"
-          title={`Visit ${name}'s LinkedIn Profile`}
-          className="p-3 bg-slate-100 dark:bg-slate-700 rounded-full hover:bg-purple-600 hover:text-white transition-all shadow-md"
-        >
-          <Linkedin size={20} />
-        </a>
       </div>
     </motion.div>
   );
@@ -104,7 +102,6 @@ const Team = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Filter tabs logic aligned with ManageTeams order
   const categories = [
     { title: "Core Team", filter: ["Chairperson", "Vice Chairperson", "Secretary", "Treasurer"], id: "core" },
     { title: "Executive Council", filter: ["Executive Council Member"], id: "exec" },
@@ -115,7 +112,6 @@ const Team = () => {
     { title: "PR Team", filter: ["PR Team Head", "PR Team Member"], id: "pr" },
   ];
 
-  // Live Search Filter
   const filteredData = teamData.filter(m =>
     m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     m.position.toLowerCase().includes(searchQuery.toLowerCase())
@@ -128,7 +124,7 @@ const Team = () => {
 
   return (
     <div className="pt-32 pb-20 px-6 min-h-screen bg-white dark:bg-slate-900 transition-colors duration-500 bg-pattern-dots">
-      <div className="container mx-auto">
+      <div className="container mx-auto max-w-6xl">
 
         {/* Header and Search */}
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center mb-10">
@@ -151,8 +147,8 @@ const Team = () => {
 
         {/* Category Filter Tabs */}
         {!searchQuery && (
-          <div className="sticky top-24 z-40 mb-20 px-4">
-            <div className="flex flex-nowrap md:flex-wrap md:justify-center gap-2 py-4 px-4 glass-effect rounded-2xl shadow-sm overflow-x-auto no-scrollbar">
+          <div className="sticky top-24 z-40 mb-16 px-4">
+            <div className="flex flex-nowrap md:flex-wrap md:justify-center gap-2 py-3 px-4 glass-effect rounded-2xl shadow-sm overflow-x-auto no-scrollbar">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
@@ -168,12 +164,11 @@ const Team = () => {
 
         {/* Members Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4, 5, 6, 7, 8].map(i => <SkeletonCard key={i} />)}
           </div>
         ) : (
           categories.map((cat, index) => {
-            // Filter members for this category and sort specific roles within the category
             const membersInCat = filteredData.filter(m => cat.filter.includes(m.position))
               .sort((a, b) => {
                 const posA = cat.filter.indexOf(a.position);
@@ -184,11 +179,11 @@ const Team = () => {
             if (membersInCat.length === 0) return null;
 
             return (
-              <div key={cat.id} id={cat.id} className="mb-32">
+              <div key={cat.id} id={cat.id} className="mb-24">
                 <motion.h2
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  className="text-4xl font-russo text-center mb-16 dark:text-white flex items-center justify-center gap-4"
+                  className="text-3xl font-russo text-center mb-12 dark:text-white flex items-center justify-center gap-4"
                 >
                   <span className="w-12 h-0.5 bg-purple-600/30"></span>
                   {cat.title}
@@ -199,8 +194,8 @@ const Team = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  transition={{ staggerChildren: 0.1 }}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 justify-center"
+                  transition={{ staggerChildren: 0.08 }}
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center"
                 >
                   {membersInCat.map((member) => (
                     <TeamCard
